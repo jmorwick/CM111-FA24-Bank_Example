@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 
 public class BankApplication {
     public static void main(String[] args) {
@@ -14,7 +17,8 @@ public class BankApplication {
             System.out.println("1) Get balance on account"); 
             System.out.println("2) Make deposit to account"); 
             System.out.println("3) Make withdrawl on account"); 
-            System.out.println("..."); 
+            System.out.println("4) Save account data to file"); 
+            System.out.println("5) Load account data from file"); 
             System.out.println("9) Quit"); 
 
             String choice = input.nextLine();
@@ -66,7 +70,42 @@ public class BankApplication {
                     }
                     break;
 
-                }case "9":
+                }case "4": {
+                    System.out.print("Enter file name: ");
+                    String fileName = input.nextLine();
+                    File f = new File(fileName);
+                    try{
+                         PrintWriter fout = new PrintWriter(f);
+                         fout.println(accounts.length);
+                         for(Account acc : accounts) {
+                            fout.println(acc.getBalance());
+                         }
+                         fout.close();
+                    } catch(FileNotFoundException e) {
+                        System.out.println("Error writing to file");
+                    }
+                    break;
+                }
+                case "5": {
+                    System.out.print("Enter file name: ");
+                    String fileName = input.nextLine();
+                    File f = new File(fileName);
+                    try{
+                         Scanner fin = new Scanner(f);
+                         accounts = new Account[fin.nextInt()];
+                         for(int i=0; i<accounts.length; i++) {
+                            accounts[i] = new Account();
+                            accounts[i].deposit(fin.nextDouble());
+                         }
+                         fin.close();
+                    } catch(FileNotFoundException e) {
+                        System.out.println("Error writing to file");
+                    }
+                    break;
+                }
+                
+                
+                case "9":
                     System.out.println("Thank you for using this program!!!");
                     System.exit(1);
 
