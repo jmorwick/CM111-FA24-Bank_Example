@@ -17,30 +17,53 @@ public class BankApplication {
             System.out.println("..."); 
             System.out.println("9) Quit"); 
 
-            int choice = input.nextInt();
+            String choice = input.nextLine();
+            String line = "";
             switch(choice) {
-                case 1:{
-                    System.out.print("Enter Account Number: ");
-                    int id = input.nextInt();
-                    System.out.printf("Balance: %f%n",
+                case "1":{
+                    try {
+                      System.out.print("Enter Account Number: ");
+                      line = input.nextLine();
+                      int id = Integer.parseInt(line);
+                      System.out.printf("Balance: %f%n",
                                       accounts[id].getBalance());
+                    } catch(NumberFormatException e) {
+                        System.out.println("Invalid input");
+                    }
                     break;
-                }case 2:{
-                    System.out.print("Enter Account Number: ");
-                    int id = input.nextInt();
-                    System.out.print("Enter Amount: ");
-                    double amount = input.nextDouble();
-                    accounts[id].deposit(amount);
+                }case "2":{
+                    try {
+                      System.out.print("Enter Account Number: ");
+                      line = input.nextLine();
+                      int id = Integer.parseInt(line);
+                      System.out.print("Enter Amount: ");
+                      line = input.nextLine();
+                      double amount = Double.parseDouble(line);
+                      if(amount <= 0) 
+                        throw new NumberFormatException();
+                      accounts[id].deposit(amount);
+                    } catch(NumberFormatException e) {
+                        System.out.println("Invalid ID number");
+                    }
                     break;
-                }case 3:{
-                    System.out.print("Enter Account Number: ");
-                    int id = input.nextInt();
-                    System.out.print("Enter Amount: ");
-                    double amount = input.nextDouble();
-                    accounts[id].withdrawl(amount);
+                }case "3":{
+                    try {
+                      System.out.print("Enter Account Number: ");
+                      line = input.nextLine();
+                      int id = Integer.parseInt(line);
+                      System.out.print("Enter Amount: ");
+                      line = input.nextLine();
+                      double amount = Double.parseDouble(line);
+                      if(amount <= 0) 
+                        throw new NumberFormatException();
+                      
+                      accounts[id].withdrawl(amount);
+                    } catch(NumberFormatException e) {
+                        System.out.println("Invalid input");
+                    }
                     break;
 
-                }case 9:
+                }case "9":
                     System.out.println("Thank you for using this program!!!");
                     System.exit(1);
 
