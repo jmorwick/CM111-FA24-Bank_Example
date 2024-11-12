@@ -25,6 +25,7 @@ public class BankApplication {
                       System.out.print("Enter Account Number: ");
                       line = input.nextLine();
                       int id = Integer.parseInt(line);
+                      if(id < 0 || id >=  accounts.length) throw new NumberFormatException();
                       System.out.printf("Balance: %f%n",
                                       accounts[id].getBalance());
                     } catch(NumberFormatException e) {
@@ -36,6 +37,7 @@ public class BankApplication {
                       System.out.print("Enter Account Number: ");
                       line = input.nextLine();
                       int id = Integer.parseInt(line);
+                      if(id < 0 || id >=  accounts.length) throw new NumberFormatException();
                       System.out.print("Enter Amount: ");
                       line = input.nextLine();
                       double amount = Double.parseDouble(line);
@@ -51,6 +53,7 @@ public class BankApplication {
                       System.out.print("Enter Account Number: ");
                       line = input.nextLine();
                       int id = Integer.parseInt(line);
+                      if(id < 0 || id >=  accounts.length) throw new NumberFormatException();
                       System.out.print("Enter Amount: ");
                       line = input.nextLine();
                       double amount = Double.parseDouble(line);
